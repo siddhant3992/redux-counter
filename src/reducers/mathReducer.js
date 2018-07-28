@@ -6,7 +6,7 @@ const mathReducer = (
     action
   ) => {
     switch (action.type) {
-      case "ADD":
+      case "ADD_FULFILLED":
         state = {
           ...state,
           result: state.result + action.payload,
