@@ -5,7 +5,7 @@ const User=props => {
     var styling={
         color:'red'
     }
-  return <p style={styling}>{props.username}</p>;
+  return <p style={styling}>{props.counter}</p>;
 };
 
 User.propTypes = {

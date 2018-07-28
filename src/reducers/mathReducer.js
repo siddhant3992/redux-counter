@@ -1,6 +1,6 @@
 const mathReducer = (
     state = {
-      result: 1,
+      result: 0,
       lastValues: []
     },
     action

@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
- const Main=(props) => {
+const Main=(props) => {
   return (
     <div>
-      <button onClick={props.changeUsername}>changeUsername</button>
+      <button onClick={props.countIncrement}>Increment</button>
+      <button onClick={props.countDecrement}>Decrement</button>
     </div>
   )
 }
 
 Main.propTypes = {
-changeUsername:PropTypes.func
+  countIncrement:PropTypes.func,
+  countDecrement:PropTypes.func,
 }
 export default Main
