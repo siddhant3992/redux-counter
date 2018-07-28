@@ -1,101 +1,36 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import logger from "redux-logger";
+import Main from './components/Main';
+import User from './components/User'
+import {connect} from "react-redux";
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+       <Main changeUsername={()=>this.props.setName("Anna")}/>
+       <User username={this.props.user.name}/>
       </div>
     );
   }
 }
 
-export default App;
-
-const mathReducer = (
-  state = {
-    result: 1,
-    lastValues: []
-  },
-  action
-) => {
-  switch (action.type) {
-    case "ADD":
-      state = {
-        ...state,
-        result: state.result + action.payload,
-        lastValues: [...state.lastValues, action.payload]
-      };
-      break;
-    case "SUBSTRACT":
-      state = {
-        ...state,
-        result: state.result - action.payload,
-        lastValues: [...state.lastValues, action.payload]
-      };
-      break;
+const mapStateToProps=(state)=>{
+  return{
+    user:state.user,
+    math:state.math
   }
-  return state;
-};
+}
 
-const userReducer = (
-  state = {
-    name: "max",
-    age: 25
-  },
-  action
-) => {
-  switch (action.type) {
-    case "SET_NAME":
-      state = {
-        ...state,
-        name: action.payload
-      };
-      break;
-    case "SET_AGE":
-      state = {
-        ...state,
-        age: action.payload
-      };
-      break;
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    setName:(name)=>{
+      dispatch({
+        type:"SET_NAME",
+        payload:name
+      });
+    }
   }
-  return state;
-};
+}
 
-const myLogger = store => next => action => {
-  console.log("Logged Action:", action);
-  next(action);
-};
-const store = createStore(
-  combineReducers({ mathReducer, userReducer }),
-  {},
-  applyMiddleware(logger)
-);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
 
-store.subscribe(() => {
-  // console.log("store updates!", store.getState());
-});
-
-store.dispatch({
-  type: "ADD",
-  payload: 100
-});
-
-store.dispatch({
-  type: "SUBSTRACT",
-  payload: 22
-});
-
-store.dispatch({
-  type: "SET_AGE",
-  payload: 30
-});
