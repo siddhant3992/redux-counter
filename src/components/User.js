@@ -9,6 +9,6 @@ const User=props => {
 };
 
 User.propTypes = {
-  username: PropTypes.string
+  counter: PropTypes.number
 };
 export default User
